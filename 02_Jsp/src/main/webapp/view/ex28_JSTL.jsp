@@ -148,5 +148,56 @@ ${k} &nbsp;/ ${vs.count} &nbsp;/ ${vs.index} &nbsp;/${vs.first} &nbsp;/${vs.last
 ${k}&nbsp;
 </c:forEach>
 
+<%-- 반복하면서 나누기 --%>
+<%-- <c: forTokens items = "배열, 컬렉션" delims="구분자" var="변수"></c:forTockens> --%>
+<c:set var="arr_2" value = "홍길동, 임꺽정/ 돌팔이, 고길동/희동이,마이콜"/>
+<c:forTokens items="${arr_2 }" delims="," var="k">
+<li> ${k} </li>
+</c:forTokens>
+<hr>
+<c:set var="arr_2" value = "홍길동, 임꺽정/ 돌팔이, 고길동/희동이,마이콜"/>
+<c:forTokens items="${arr_2 }" delims="/" var="k">
+<li> ${k} </li>
+</c:forTokens>
+<hr>
+
+<%-- 페이지 이동 	: forward, sendRedirect
+	 JSP 액션 태그	: forward만 존재
+	 JSTL		: sendRedirect만 존재
+	 둘 다 파라미터 값을 넘길 수 있다.
+	 
+	 <jsp:forward page ="이동할 장소">
+		 <jsp:param value="" name=""/>
+	 </jsp:forward>
+	 
+	 //jsp액션은 특이하게 받는 쪽이 아닌 보내는 쪽에서 인코딩을 해주어야한다.
+	 <%request.setCharacterEncoding("utf-8");>
+	 <jsp:forward page ="ex08.jsp">
+		 <jsp:param value="도우너" name="name"/>
+		 <jsp:param value="1004" name="age"/>
+	 </jsp:forward>		 
+	 <c:redirect url="ex08.jsp">
+            <c:param name="name" value="또치" />
+            <c:param name="age" value="108" />
+         </c:redirect>  
+ --%>
+ <h2>form태그를 이용해서 파라미터 전송</h2>
+		<form action="ex29_result.jsp" method="post">
+		<fieldset>
+			<legend> 데이저 전송 </legend>
+			<p> **이름 : <input type="text" name="name" placeholder="이름 입력하세요" required></p>
+			<p> **나이 : <input type="number" name="age" placeholder="나이 입력하세요" required></p>
+			<p> 성별 : <input type="radio" name="gender" value="남성">남성
+			           <input type="radio" name="gender" value="여성">여성
+			</p>
+			<p> 취미 : <input type="checkbox" name="hobby" value="운동">운동
+			           <input type="checkbox" name="hobby" value="영화">영화
+			           <input type="checkbox" name="hobby" value="게임">게임
+			           <input type="checkbox" name="hobby" value="독서">독서
+			</p>
+			<input type="submit" value="보내기" >
+		</fieldset>
+	</form>
+
 </body>
 </html>
